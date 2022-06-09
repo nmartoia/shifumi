@@ -16,20 +16,20 @@ scoreOrdi.textContent = localStorage.getItem('localscoreO');
 const clear = document.querySelector('#clear')
 clear.style.display='block'
 const allsigne = ["pierre","ciseaux","feuille"]
-jouer.addEventListener('click',()=>{
+for(let i=0;i<signe.length;i++){
+    signe[i].style.display='block'
+    signe[i].addEventListener('click',()=>{
+        if(ordi===0){
+            choixJoueur=signe[i].textContent
+            joueur.textContent=signe[i].textContent
+        }
+        else{
+            alert('la partie est fini')
+        }
+    })
+}
+function shifumie() {
     joueur.parentElement.style.display='block'
-    for(let i=0;i<signe.length;i++){
-        signe[i].style.display='block'
-        signe[i].addEventListener('click',()=>{
-            if(ordi!=0){
-                alert('la partie est fini')
-            }
-            else{
-                choixJoueur=signe[i].textContent
-                joueur.textContent=signe[i].textContent
-            }
-        })
-    }
     jouer.style.display='none'
     p.style.display='block'
     const interval = setInterval(function(){
@@ -44,7 +44,7 @@ jouer.addEventListener('click',()=>{
             choixOrdi.className='choixOrdi'
             document.body.appendChild(choixOrdi)
             rejouer.style.display='block'
-            if(choixJoueur==undefined||ordi=='ciseaux'&&choixJoueur=='feuille'||ordi=='feuille'&&choixJoueur=='pierre'||ordi=='pierre'&&choixJoueur=='ciseaux'){
+            if(choixJoueur==undefined||ordi=='ciseaux'&&choixJoueur=='feuille'||ordi=='feuille'&&choixJoueur=='pierre'||ordi=='pierre'&choixJoueur=='ciseaux'){
                 p.textContent='vous avez perdu'
                 scoreOrdi.textContent++
             }
@@ -59,19 +59,19 @@ jouer.addEventListener('click',()=>{
             localStorage.setItem('localscoreO',scoreOrdi.textContent)
         }
     },1000)   
-})
+}
+
+jouer.addEventListener('click',shifumie())
 rejouer.addEventListener('click',()=>{
+    choixJoueur=undefined
     rejouer.style.display='none'
-    jouer.style.display='block'
-    for (let i = 0; i < signe.length; i++) {
-        signe[i].style.display='none'
-    }
     p.textContent='5'
     joueur.parentElement.style.display='none'
     joueur.textContent=''
     p.style.display='none'
-    let e =document.querySelector('.choixOrdi').remove()
+    document.querySelector('.choixOrdi').remove()
     ordi=0
+    shifumie()
 })
 clear.addEventListener('click',()=>{
     localStorage.setItem('localscoreJ','0')
