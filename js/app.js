@@ -6,13 +6,20 @@ const signe = document.querySelectorAll('.signe')
 const p = document.querySelector('.interval')
 let ordi = 0
 let choixJoueur;
+const joueur = document.querySelector('.joueur')
+joueur.parentElement.style.display='none'
 const rejouer = document.getElementById('rejouer')
 const allsigne = ["pierre","ciseaux","feuille"]
 jouer.addEventListener('click',()=>{
+    joueur.parentElement.style.display='block'
     for(let i=0;i<signe.length;i++){
         signe[i].style.display='block'
         signe[i].addEventListener('click',()=>{
             choixJoueur=signe[i].textContent
+            joueur.textContent=signe[i].textContent
+            if(ordi!=0){
+                alert('la partie est fini')
+            }
         })
     }
     jouer.style.display='none'
@@ -25,20 +32,30 @@ jouer.addEventListener('click',()=>{
             clearInterval(interval)
             ordi = allsigne[getRandomInt(2)]
             const choixOrdi=document.createElement('p')
-            choixOrdi.textContent=ordi
+            choixOrdi.textContent='l\'ordinateur a choisie : '+ordi
+            choixOrdi.className='choixOrdi'
             document.body.appendChild(choixOrdi)
-            console.log(choixJoueur)
             rejouer.style.display='block'
             if(choixJoueur==undefined||ordi=='ciseaux'&&choixJoueur=='feuille'||ordi=='feuille'&&choixJoueur=='pierre'||ordi=='pierre'&&choixJoueur=='ciseaux'){
-                console.log('vous avez perdu')
+                p.textContent='vous avez perdu'
             }
             else if(ordi===choixJoueur){
-                console.log('match nul')
+                p.textContent='match nul'
             }
             else{
-                console.log('vous avez gagner')
+                p.textContent='vous avez gagner'
             }
         }
     },1000)   
 })
-rejouer.addEventListener('click')
+rejouer.addEventListener('click',()=>{
+    rejouer.style.display='none'
+    jouer.style.display='block'
+    for (let i = 0; i < signe.length; i++) {
+        signe[i].style.display='none'
+    }
+    p.textContent='5'
+    p.style.display='none'
+    document.querySelector('.choixOrdi').style.display='none'
+    ordi=0
+})
