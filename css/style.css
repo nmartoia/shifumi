@@ -1,0 +1,9 @@
+#jouer{
+    display: block;
+}
+button{
+    display: none;
+}
+.interval{
+    display: none;
+}
