@@ -13,16 +13,20 @@ const scoreJoueur = document.querySelector('#scoreJoueur')
 const scoreOrdi = document.querySelector('#scoreOrdi')
 scoreJoueur.textContent= localStorage.getItem('localscoreJ');
 scoreOrdi.textContent = localStorage.getItem('localscoreO');
+const clear = document.querySelector('#clear')
+clear.style.display='block'
 const allsigne = ["pierre","ciseaux","feuille"]
 jouer.addEventListener('click',()=>{
     joueur.parentElement.style.display='block'
     for(let i=0;i<signe.length;i++){
         signe[i].style.display='block'
         signe[i].addEventListener('click',()=>{
-            choixJoueur=signe[i].textContent
-            joueur.textContent=signe[i].textContent
             if(ordi!=0){
                 alert('la partie est fini')
+            }
+            else{
+                choixJoueur=signe[i].textContent
+                joueur.textContent=signe[i].textContent
             }
         })
     }
@@ -66,6 +70,12 @@ rejouer.addEventListener('click',()=>{
     joueur.parentElement.style.display='none'
     joueur.textContent=''
     p.style.display='none'
-    document.querySelector('.choixOrdi').style.display='none'
+    let e =document.querySelector('.choixOrdi').remove()
     ordi=0
+})
+clear.addEventListener('click',()=>{
+    localStorage.setItem('localscoreJ','0')
+    localStorage.setItem('localscoreO','0')
+    scoreJoueur.textContent='0'
+    scoreOrdi.textContent='0'
 })
