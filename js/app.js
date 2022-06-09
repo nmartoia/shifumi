@@ -9,6 +9,8 @@ let choixJoueur;
 const joueur = document.querySelector('.joueur')
 joueur.parentElement.style.display='none'
 const rejouer = document.getElementById('rejouer')
+const scoreJoueur = document.querySelector('#scoreJoueur')
+const scoreOrdi = document.querySelector('#scoreOrdi')
 const allsigne = ["pierre","ciseaux","feuille"]
 jouer.addEventListener('click',()=>{
     joueur.parentElement.style.display='block'
@@ -38,12 +40,14 @@ jouer.addEventListener('click',()=>{
             rejouer.style.display='block'
             if(choixJoueur==undefined||ordi=='ciseaux'&&choixJoueur=='feuille'||ordi=='feuille'&&choixJoueur=='pierre'||ordi=='pierre'&&choixJoueur=='ciseaux'){
                 p.textContent='vous avez perdu'
+                scoreOrdi.textContent++
             }
             else if(ordi===choixJoueur){
                 p.textContent='match nul'
             }
             else{
                 p.textContent='vous avez gagner'
+                scoreJoueur.textContent++
             }
         }
     },1000)   
@@ -55,6 +59,8 @@ rejouer.addEventListener('click',()=>{
         signe[i].style.display='none'
     }
     p.textContent='5'
+    joueur.parentElement.style.display='none'
+    joueur.textContent=''
     p.style.display='none'
     document.querySelector('.choixOrdi').style.display='none'
     ordi=0
