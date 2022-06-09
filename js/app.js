@@ -1,6 +1,6 @@
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
-  }  
+  }
 const jouer = document.querySelector("#jouer")
 const signe = document.querySelectorAll('.signe')
 const p = document.querySelector('.interval')
@@ -11,6 +11,8 @@ joueur.parentElement.style.display='none'
 const rejouer = document.getElementById('rejouer')
 const scoreJoueur = document.querySelector('#scoreJoueur')
 const scoreOrdi = document.querySelector('#scoreOrdi')
+scoreJoueur.textContent= localStorage.getItem('localscoreJ');
+scoreOrdi.textContent = localStorage.getItem('localscoreO');
 const allsigne = ["pierre","ciseaux","feuille"]
 jouer.addEventListener('click',()=>{
     joueur.parentElement.style.display='block'
@@ -49,6 +51,8 @@ jouer.addEventListener('click',()=>{
                 p.textContent='vous avez gagner'
                 scoreJoueur.textContent++
             }
+            localStorage.setItem('localscoreJ',scoreJoueur.textContent)
+            localStorage.setItem('localscoreO',scoreOrdi.textContent)
         }
     },1000)   
 })
